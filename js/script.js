@@ -14,16 +14,39 @@ let ground;
 // test rectangle particle 
 let testParticles = [];
 
+// all the walls and ground
+let walls = [];
 // ground bottom of the screen
 let groundOptions = {
     x: 320,
     y: 520,
-    w: 500,
+    w: 600,
     h: 100,
     options: {
         isStatic: true
     }
 };
+// ground bottom of the screen
+let leftWallOptions = {
+    x: 0,
+    y: 300,
+    w: 100,
+    h: 500,
+    options: {
+        isStatic: true
+    }
+};
+// ground bottom of the screen
+let rightWallOptions = {
+    x: 680,
+    y: 300,
+    w: 100,
+    h: 500,
+    options: {
+        isStatic: true
+    }
+};
+
 
 // face coordinates
 let faceVertices = [];
@@ -96,8 +119,15 @@ function setup() {
     croppedFace = createImage(canvas.width, canvas.height);
     boudingCroppedFace = createImage();
     // add a ground at the bottom of the canvas
-    ground = Bodies.rectangle(groundOptions.x, groundOptions.y, groundOptions.w, groundOptions.h, groundOptions.options)
+
+    walls.push(ground = Bodies.rectangle(groundOptions.x, groundOptions.y, groundOptions.w, groundOptions.h, groundOptions.options));
+    walls.push(leftWall = Bodies.rectangle(leftWallOptions.x, leftWallOptions.y, leftWallOptions.w, leftWallOptions.h, leftWallOptions.options));
+    walls.push(rightWall = Bodies.rectangle(rightWallOptions.x, rightWallOptions.y, rightWallOptions.w, rightWallOptions.h, rightWallOptions.options));
+
     World.add(world, ground);
+    World.add(world, leftWall);
+    World.add(world, rightWall);
+
 
     // add test particle 
 
@@ -218,7 +248,7 @@ function cutout() {
     let mx = (faceBottomRight.x - faceTopLeft.x) / 2;
     let my = (faceBottomRight.y - faceTopLeft.y) / 2;
 
-    faces.push(new Face(300, 300, poly, croppedFace));
+    faces.push(new Face(mx, my, poly, boundingCroppedFace));
     faceCutOut = true;
 }
 
@@ -273,7 +303,8 @@ function displayTestParticles() {
 }
 // when clicking, snapshot is taken and processed into 
 // a cropped cut out around the face
-function mousePressed() {
+function mouseDragged() {
+    // testParticles.push(new Box(mouseX, mouseY, 20, 20));
 
 };
 
@@ -290,7 +321,5 @@ function keyPressed() {
             cutout();
         };
     }
-    if (keyCode === 81) {
-        testParticles.push(new Box(200, 100, 20, 20));
-    }
+    if (keyCode === 81) {}
 }
