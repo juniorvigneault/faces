@@ -2,14 +2,28 @@
 let Engine = Matter.Engine,
     World = Matter.World,
     Bodies = Matter.Bodies,
-    Runner = Matter.Runner;
+    Runner = Matter.Runner,
+    MouseConstraint = Matter.MouseConstraint;
 
 // matter.js
 let engine,
-    world;
+    world,
+    mouseConstraint;
 
-// matter.js test box 
-let box;
+let ground;
+// test rectangle particle 
+let testParticles = [];
+
+// ground bottom of the screen
+let groundOptions = {
+    x: 320,
+    y: 520,
+    w: 500,
+    h: 100,
+    options: {
+        isStatic: true
+    }
+};
 
 // face coordinates
 let faceVertices = [];
@@ -17,9 +31,21 @@ let faceVertices = [];
 // ml5 facemesh and detections 
 let facemesh;
 let detections = [];
-let modelIsReady = false;
+let faceIsDetected = false;
+let faceTopLeft = {
+    x: undefined,
+    y: undefined
+}
+let faceBottomRight = {
+    x: undefined,
+    y: undefined
+}
+
+let boundingBoxWidth;
+let boundingBoxHeight;
 // detect only 1 face at a time
-const options = {
+
+let options = {
     maxFaces: 1,
 }
 
@@ -34,6 +60,8 @@ let canvas = {
 let snapshot;
 let croppedFace;
 let faceCutOut = false;
+let faces = [];
+let boundingCroppedFace;
 
 // polygon for pixel collision detection
 let poly = [];
@@ -44,11 +72,15 @@ function setup() {
     createCanvas(canvas.width, canvas.height);
     engine = Engine.create();
     world = engine.world;
-    Engine.run(engine);
+    runner = Matter.Runner.create();
+    Matter.Runner.run(runner, engine);
 
-    // test box falling at start of programm 
-    box = new Box(200, 200, 200, 200);
+    // Create a mouse constraint
+    mouseConstraint = MouseConstraint.create(engine);
+    // Add the mouse constraint to the world
+    World.add(world, mouseConstraint);
 
+    World.add(world, mouseConstraint);
     // Set up the live camera feed
     video = createCapture(VIDEO);
     video.size(canvas.width, canvas.height);
@@ -62,13 +94,21 @@ function setup() {
     snapshot = createImage(canvas.width, canvas.height);
     // stores the cropped face from the snapshot after processing
     croppedFace = createImage(canvas.width, canvas.height);
+    boudingCroppedFace = createImage();
+    // add a ground at the bottom of the canvas
+    ground = Bodies.rectangle(groundOptions.x, groundOptions.y, groundOptions.w, groundOptions.h, groundOptions.options)
+    World.add(world, ground);
+
+    // add test particle 
+
+
 }
 
 // grey background on canvas, display particles in faces array
 function draw() {
     display();
-}
 
+}
 
 // When facemesh is loaded, log "model is ready" and 
 // and start detecting faces
@@ -78,17 +118,26 @@ function modelReady() {
     // check for faces
     facemesh.on('face', results => {
         detections = results;
+        faceIsDetected = true;
     });
+
 
 }
 
-async function getKeypoints() {
-    // get the silhoutte of all the detected faces
+function getKeypoints() {
+    // get all detected faces (only one is possible now)
     for (let i = 0; i < detections.length; i++) {
+        // get the keypoints of the silhouette of each face
         const faceKeypoints = detections[i].annotations.silhouette;
-
+        // find the top and bottom coordinates of the face to find center
+        // top left bounding box
+        faceTopLeft.x = detections[i].boundingBox.topLeft[0][0];
+        faceTopLeft.y = detections[i].boundingBox.topLeft[0][1];
+        // bottom right bounding box
+        faceBottomRight.x = detections[i].boundingBox.bottomRight[0][0];
+        faceBottomRight.y = detections[i].boundingBox.bottomRight[0][1];
+        // create polygon around the face
         createFacePoly(faceKeypoints);
-
         // draw small green circles at every coordinate of the silhouette 
         // for each detected faces 
         for (let j = 0; j < faceKeypoints.length; j++) {
@@ -96,6 +145,9 @@ async function getKeypoints() {
             drawfaceKeypoints(x, y);
         }
     }
+    boundingBoxWidth = (faceBottomRight.x - faceTopLeft.x);
+    boundingBoxHeight = (faceBottomRight.y - faceTopLeft.y);
+    boundingCroppedFace = croppedFace.get(faceTopLeft.x, faceTopLeft.y, boundingBoxWidth, boundingBoxHeight);
 }
 // draw the green dots on all keypoints
 function drawfaceKeypoints(x, y) {
@@ -122,6 +174,8 @@ function createFacePoly(faceKeypoints) {
     }
     endShape(CLOSE);
     pop();
+
+
 }
 
 // cut out the face in the snapshot 
@@ -152,13 +206,25 @@ function cutout() {
     // update the set pixels of the cropped face
     croppedFace.updatePixels();
     // face is now cut out, display the cropped face
+
+
+
+    // copy(croppedFace, faceTopLeft.x, faceTopLeft.y, sw, sh, dx, dy, dw, dh)
+    boundingBoxWidth = (faceBottomRight.x - faceTopLeft.x);
+    boundingBoxHeight = (faceBottomRight.y - faceTopLeft.y);
+    boundingCroppedFace = croppedFace.get(faceTopLeft.x, faceTopLeft.y, boundingBoxWidth, boundingBoxHeight);
+
+
+    let mx = (faceBottomRight.x - faceTopLeft.x) / 2;
+    let my = (faceBottomRight.y - faceTopLeft.y) / 2;
+
+    faces.push(new Face(300, 300, poly, croppedFace));
     faceCutOut = true;
 }
 
 function display() {
     // grey background 
-    background(220, 200, 210);
-
+    background(0, 250, 0);
     // if the face is not cropped, display live video feed 
     // with green keypoints and line around the face
     if (faceCutOut === false) {
@@ -166,29 +232,65 @@ function display() {
         // draw all the keypoints with green dots
         image(video, 0, 0, canvas.width, canvas.height)
         getKeypoints();
-// if face is cropped, display only the cropped image 
+        push();
+        fill(0, 0, 0, 0)
+        rect(faceTopLeft.x, faceTopLeft.y, boundingBoxWidth, boundingBoxHeight)
+        pop();
+
+        // if face is cropped, display only the cropped image 
     } else if (faceCutOut === true) {
-        // display cropped face
-        image(croppedFace, 0, 0);
+        displayFaces();
     };
-    // display matter.js test box at the start of application
-    box.display();
+
+    // display ground at the bottom of canvas
+    displayGround();
+    displayTestParticles();
+
 };
 
+function displayGround() {
+    push();
+    rectMode(CENTER);
+    fill(250);
+    noStroke();
+    rect(groundOptions.x, groundOptions.y, groundOptions.w, groundOptions.h)
+    // rect(ground.x, ground.y, ground.w, ground.h)
+    pop();
+}
+
+function displayFaces() {
+    for (let i = 0; i < faces.length; i++) {
+        faces[i].display();
+    };
+
+    // image(boudingCroppedFace, 0,0);
+};
+
+function displayTestParticles() {
+    for (let i = 0; i < testParticles.length; i++) {
+        testParticles[i].display();
+    }
+}
 // when clicking, snapshot is taken and processed into 
 // a cropped cut out around the face
 function mousePressed() {
-    if (modelIsReady) {
-        // take a frame from video feed on click
-        snapshot = video.get();
-        // cut out the face in the snapshot
-        cutout();
-    };
+
 };
 
 // if pressing space, the live video feed starts again
-function keyPressed(){
- if (keyCode === 32) {
-     faceCutOut = false
- }
- }
+function keyPressed() {
+    if (keyCode === 32) {
+        faceCutOut = false
+    }
+    if (keyCode === 13) {
+        if (faceIsDetected) {
+            // take a frame from video feed on click
+            snapshot = video.get();
+            // cut out the face in the snapshot
+            cutout();
+        };
+    }
+    if (keyCode === 81) {
+        testParticles.push(new Box(200, 100, 20, 20));
+    }
+}
