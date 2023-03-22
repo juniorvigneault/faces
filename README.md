@@ -6,7 +6,7 @@ As of now: I have a running p5.js sketch with a live video feed coming from webc
 
 ![silhouette with keypoinnts](/assets/images/documentation/1.jpg)
 
-When pressing enter, a snapshot is taken of the entire canvas. This image is then cropped tighter around the face (using the bounding rectangle provided by ml5). Using the face silhouette keypoints as vertices, a shape is then created around and used to create a unique matter.js body. The cropped face image is positioned on top of the body (like a texture) and added to the "world", falling to the bottom of the screen on the ground.
+When pressing enter, a snapshot of the entire canvas is taken. This image is then cropped tighter around the face (using the bounding rectangle provided by ml5). Using the face silhouette keypoints as vertices, a shape is created and used to build a new unique matter.js body. The cropped face image is positioned on top of its matter.js clone (like a texture) and added to the "world". The result is a face falling from the top of the screen, landing on the ground at the bottom of the canvas.
 
 ![face on ground](/assets/images/documentation/2.jpg)
 
