@@ -4,7 +4,7 @@ Interactive installation prototype using ml5 facemesh, matter.js and p5.js.
 ### March 10 2023
 Initial sketch and idea:
 
-![Initial sketch of the project](/assets/images/documentation/sketch1.jpg)
+![Initial sketch of the project](/assets/images/documentation/3.gif)
 
 
 ### March 22nd 2023 
