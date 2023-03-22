@@ -262,10 +262,6 @@ function display() {
         // draw all the keypoints with green dots
         image(video, 0, 0, canvas.width, canvas.height)
         getKeypoints();
-        push();
-        fill(0, 0, 0, 0)
-        rect(faceTopLeft.x, faceTopLeft.y, boundingBoxWidth, boundingBoxHeight)
-        pop();
 
         // if face is cropped, display only the cropped image 
     } else if (faceCutOut === true) {
