@@ -21,3 +21,12 @@ These were the first big steps I needed to take in order to jumpstart the projec
 1. Have a second canvas where the face are actually added that will be displayed as a projection.
 2. Implement Node.js to easily save the image snapshots on a server, as well as the position and the shape of each face. This will allow for the installation to save in specific states, to ensure it can reboot from its previous state if it stops running. The canvas can then accumulate faces from different sessions is there is desire to do so. 
 
+### March 27nd 2023 
+
+I implemented a database with mongoDB so that all the position, angle, vertices and image path of each face are stored indidividually. I was originally planning on doing this with Json but I was scared it would be too difficult to manage. I now have to figure out how to retrieve the information and run it so that the all the faces reappear at the position they were in last. I also need to figure out something: if I want to save everything again, I want my database to only save the new faces as new entities, and update the position and angle of the previously stored faces. Maybe I could also just delete everything and save it again as a whole... Because some faces are maybe going to dissappear if they fall to the side and are spliced from the array. I'm not even sure if I want to do that. Anyway, I want to learn how to retrieve and save stuff from the database in case I want to do it in different ways. I will start by writing code to get the stored data in the database and running it to recreate at least one face. 
+
+My goal today is to do that and to create another canvas to add the faces on. I will create it on below the canvas with camera feed so we can see both. 
+
+I'm starting a list of details I want to add that I might forget along the way:
+
+1. I forgot for now. But coming soon. 
