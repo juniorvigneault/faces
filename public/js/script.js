@@ -93,6 +93,16 @@ let imagePath;
 // polygon for pixel collision detection
 let poly = [];
 
+// create 2 canvases
+let faceCanvas = function(fc){
+    fc.setup = function(){
+    fc.createCanvas(200, 200);
+    }
+    fc.draw = function(){
+        fc.background(255,0,0)
+    }
+}
+let myp5 = new p5(faceCanvas);
 // setting up p5 canvas, matter.js engine, facemesh with ml5 and
 // video capture
 function setup() {

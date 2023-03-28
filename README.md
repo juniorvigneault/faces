@@ -29,4 +29,5 @@ My goal today is to do that and to create another canvas to add the faces on. I 
 
 I'm starting a list of details I want to add that I might forget along the way:
 
-1. I forgot for now. But coming soon. 
+1. Use higher confidence level to detect only faces 
+2.
