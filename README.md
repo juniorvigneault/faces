@@ -7,7 +7,7 @@ Initial sketch and idea:
 ![Initial sketch of the project](public/assets/images/documentation/sketch1.jpg)
 
 
-### March 22nd 2023 
+### March 22 2023 
 As of now: I have a running p5.js sketch with a live video feed coming from webcam. When a face is detected using ml5, a line around the silhouette of the face is drawn as well as small green dots on each of the keypoints. 
 
 ![Silhouette with keypoinnts](public/assets/images/documentation/1.jpg)
@@ -21,7 +21,7 @@ These were the first big steps I needed to take in order to jumpstart the projec
 1. Have a second canvas where the face are actually added that will be displayed as a projection.
 2. Implement Node.js to easily save the image snapshots on a server, as well as the position and the shape of each face. This will allow for the installation to save in specific states, to ensure it can reboot from its previous state if it stops running. The canvas can then accumulate faces from different sessions is there is desire to do so. 
 
-### March 27nd 2023 
+### March 27 2023 
 
 I implemented a database with mongoDB so that all the position, angle, vertices and image path of each face are stored indidividually. I was originally planning on doing this with Json but I was scared it would be too difficult to manage. I now have to figure out how to retrieve the information and run it so that the all the faces reappear at the position they were in last. I also need to figure out something: if I want to save everything again, I want my database to only save the new faces as new entities, and update the position and angle of the previously stored faces. Maybe I could also just delete everything and save it again as a whole... Because some faces are maybe going to dissappear if they fall to the side and are spliced from the array. I'm not even sure if I want to do that. Anyway, I want to learn how to retrieve and save stuff from the database in case I want to do it in different ways. I will start by writing code to get the stored data in the database and running it to recreate at least one face. 
 
@@ -33,7 +33,7 @@ I'm starting a list of details I want to add that I might forget along the way:
 2. Create a seperate file for my database password and stuff... haha
 
 
-### March 27nd 2023 
+### March 29 2023 
 
 I now have two canvases, one with the live video feed and ml5 stuff (that is hidden) and one were the faces are added, which will serve as a projection for the installation. It looks *nice* I think but I think I'm losing a bit of steam in terms of like is this an interesting project? I've been so focused on developping the application that now I'm looking at it and i'm like: oh cool, so... that's it? But I guess everything will be in how I present it, and sound and stuff. I also need to think about it conceptually (what it means for me). Still need to work out how I will get the data from my database and run it to position the faces with their according image at the position where they last were when I saved the state. Also.... can the faces fall and dissappear or something? or they kind of stay there forever...I guess i can't answer those things now because I'm tired and I also need to see the thing in a real space. 
 
