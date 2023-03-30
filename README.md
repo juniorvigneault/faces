@@ -31,3 +31,10 @@ I'm starting a list of details I want to add that I might forget along the way:
 
 1. Use higher confidence level to detect only faces 
 2. Create a seperate file for my database password and stuff... haha
+
+
+### March 27nd 2023 
+
+I now have two canvases, one with the live video feed and ml5 stuff (that is hidden) and one were the faces are added, which will serve as a projection for the installation. It looks *nice* I think but I think I'm losing a bit of steam in terms of like is this an interesting project? I've been so focused on developping the application that now I'm looking at it and i'm like: oh cool, so... that's it? But I guess everything will be in how I present it, and sound and stuff. I also need to think about it conceptually (what it means for me). Still need to work out how I will get the data from my database and run it to position the faces with their according image at the position where they last were when I saved the state. Also.... can the faces fall and dissappear or something? or they kind of stay there forever...I guess i can't answer those things now because I'm tired and I also need to see the thing in a real space. 
+
+![Lots of my face](public/assets/images/documentation/3.jpg)
