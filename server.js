@@ -13,7 +13,6 @@ const password = "gFn78p58UL7oE6Yo";
 const cluster = "faces.5ak7ogt";
 const dbname = "Faces";
 
-
 let imagePath;
 
 app.use(fileuploadMiddleWare());
