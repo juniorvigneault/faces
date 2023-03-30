@@ -17,15 +17,12 @@ let faceCanvas = function (fc) {
     // boundaries static matter js bodies bottom, left and right
     let ground, leftWall, rightWall;
     let boundaries = [];
-    let canvas = {
-        width: 1920,
-        height: 1080
-    };
+ 
     let boundaryGround = {
         x: 200,
-        y: canvas.height,
+        y: faceCanvasDimensions.height,
         // make sure the length of ground covers width of canvas
-        w: canvas.width * 2,
+        w: faceCanvasDimensions.width * 2,
         h: 50,
         angle: 0
     };
@@ -34,22 +31,22 @@ let faceCanvas = function (fc) {
         y: 200,
         w: 50,
         // make sure the height of wall covers height of canvas
-        h: canvas.height * 2,
+        h: faceCanvasDimensions.height * 2,
         angle: 0
     };
     let boundaryRightWall = {
-        x: canvas.width,
+        x: faceCanvasDimensions.width,
         y: 200,
         w: 50,
         // make sure the height of wall covers height of canvas
-        h: canvas.height * 2,
+        h: faceCanvasDimensions.height * 2,
         angle: 0
     };
 
     let particleTest;
     // setup function of face canvas 
     fc.setup = function () {
-        let cnv = fc.createCanvas(canvas.width, canvas.height);
+        let cnv = fc.createCanvas(faceCanvasDimensions.width, faceCanvasDimensions.height);
         cnv.parent('parent');
         let parentElement = document.getElementById('parent');
         engine = Engine.create();

@@ -34,6 +34,16 @@ let faceImage;
 let faces = [];
 let croppedFaceImage;
 
+let faceCanvasDimensions = {
+    width: 3840,
+    height: 2160
+}
+
+let facePosition = {
+    x: faceCanvasDimensions.width / 2,
+    y: -100
+}
+
 // save face image to server
 let formData;
 let imagePath;
@@ -63,8 +73,6 @@ function setup() {
     snapshot = createImage(canvas.width, canvas.height);
     // stores the cropped face from the snapshot after processing
     faceImage = createImage(canvas.width, canvas.height);
-
-    boudingCroppedFace = createImage();
 }
 
 //run video feed and draw keypoints on face silhouette
@@ -155,14 +163,12 @@ async function cutout() {
     };
     // update the set pixels of the cropped face
     faceImage.updatePixels();
-    // face is now cut out, display the cropped face
 
-    // copy(croppedFace, faceTopLeft.x, faceTopLeft.y, sw, sh, dx, dy, dw, dh)
     boundingBoxWidth = (faceBottomRight.x - faceTopLeft.x);
     boundingBoxHeight = (faceBottomRight.y - faceTopLeft.y);
     croppedFaceImage = faceImage.get(faceTopLeft.x, faceTopLeft.y, boundingBoxWidth, boundingBoxHeight);
 
-    faces.push(new Face(500, 0, poly, croppedFaceImage));
+    faces.push(new Face(facePosition.x, facePosition.y, poly, croppedFaceImage));
     // imagePath = await saveFaceImage();
     // faces[faces.length - 1].setImageUrl(imagePath);
 }

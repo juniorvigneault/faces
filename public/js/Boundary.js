@@ -5,7 +5,9 @@ class Boundary {
         this.w = w;
         this.h = h;
         this.options = {
-            isStatic: true
+            isStatic: true,
+            friction: 0,
+            restitution: 0.5
         };
         this.world = world;
         this.body = Matter.Bodies.rectangle(this.x, this.y, this.w, this.h, this.options);

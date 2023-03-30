@@ -8,7 +8,10 @@ class Face {
         // based on the keypoints
         this.poly = poly;
         this.options = {
-            isStatic: false
+            isStatic: false,
+            friction:1,
+            restitution: 0.5
+
         };
         this.isCreated =false;
         // this.world = world
