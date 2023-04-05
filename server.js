@@ -4,8 +4,13 @@ const mongoose = require('mongoose'); // Mongoose library for interacting with M
 const faceModel = require("./faceModel"); // Face model schema
 const app = express(); // Creating an instance of Express app
 const fileuploadMiddleWare = require("express-fileupload"); // Middleware for handling file uploads
-const port = process.env.PORT || 3000; // Setting the port number for the application
+const port = process.env.PORT || 3001; // Setting the port number for the application
 const fs = require('fs'); // Node.js file system module for file operations
+
+// const {
+//     SerialPort
+// } = require('serialport');
+// const socketIO = require('socket.io');
 
 // database info
 const username = "juniorvigneault";
@@ -15,12 +20,36 @@ const dbname = "Faces";
 
 let imagePath;
 
+// controller server to communicate with microcontroller
+// const controllerPort = new SerialPort({
+//     path: '/dev/tty.usbmodem14201', 
+//     baudRate: 9600
+// }); 
+
+// const server = app.listen(port, () => {
+//     console.log(`App is listening on port ${port}`);
+// });
+
+// create a socket io server and attach it to the running server
+// this allows the server to receive and emit events through
+// socket.io library
+// const io = socketIO(server);
+
+// controllerPort.on('data', function (data) {
+//     const input = data.toString().trim();
+//     console.log('Data received:', input);
+//     io.emit('controllerData', input);
+// });
+
+// connect with mongo 
 app.use(fileuploadMiddleWare());
 app.use(express.urlencoded({
     extended: true
 }));
 app.use(express.json());
+
 app.use(express.static('public'));
+app.use(express.static(__dirname + '/node_modules'));
 
 mongoose.connect(`mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${dbname}?retryWrites=true&w=majority`);
 
@@ -63,8 +92,4 @@ app.post('/uploadFaceState', async (req, res) => {
   } catch (error) {
       res.status(500).send(error);
   }
-});
-
-app.listen(port, () => {
-    console.log(`App is listening on port ${port}`);
 });

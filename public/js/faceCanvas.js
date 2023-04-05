@@ -17,7 +17,7 @@ let faceCanvas = function (fc) {
     // boundaries static matter js bodies bottom, left and right
     let ground, leftWall, rightWall;
     let boundaries = [];
- 
+
     let boundaryGround = {
         x: 200,
         y: faceCanvasDimensions.height,
@@ -44,6 +44,8 @@ let faceCanvas = function (fc) {
     };
 
     let particleTest;
+
+    let backgroundColor = 20;
     // setup function of face canvas 
     fc.setup = function () {
         let cnv = fc.createCanvas(faceCanvasDimensions.width, faceCanvasDimensions.height);
@@ -72,11 +74,12 @@ let faceCanvas = function (fc) {
     // draw function of face canvas
     fc.draw = function () {
         display();
-
+        flash();
+        console.log(faces.length)
     };
 
     function display() {
-        fc.background(0, 0, 0);
+        fc.background(backgroundColor);
         // display ground at the bottom of canvas
         for (let i = 0; i < boundaries.length; i++) {
             boundaries[i].display(fc);
@@ -92,6 +95,17 @@ let faceCanvas = function (fc) {
         }
         // displayTestParticle();
     };
+
+    function flash() {
+        if (isFlashing) {
+            fc.noStroke();
+            fc.push();
+            fc.fill(flashColor);
+            fc.rectMode(CENTER);
+            fc.rect(fc.width / 2, fc.height / 2, fc.width, fc.height);
+            fc.pop();
+        }
+    }
 
     function displayTestParticle() {
         fc.push();

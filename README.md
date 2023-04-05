@@ -30,8 +30,9 @@ My goal today is to do that and to create another canvas to add the faces on. I 
 I'm starting a list of details I want to add that I might forget along the way:
 
 1. Use higher confidence level to detect only faces 
-2. Create a seperate file for my database password and stuff... haha
-
+2. Create a seperate file for my database password
+3. Make project in two separate files listening to the same server to see if it fixes performance issues
+4. At the start of the program, have the choice to run application from scratch or get data from database and run program from last save state. Image will then be drawn from saved image on server.
 
 ### March 29 2023 
 

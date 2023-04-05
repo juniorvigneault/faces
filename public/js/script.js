@@ -48,11 +48,20 @@ let facePosition = {
 let formData;
 let imagePath;
 
+let isFlashing;
+let flashTime = 50;
+let flashColor = 255;
+// let flashGradient = 50;
+let flashTrigger = 2000;
+let pictureTrigger = 50;
+
 // polygon for pixel collision detection
 let poly = [];
 
 let videCanvas;
 
+let controllerData = false;
+let connectedToSocket = false;
 // setting up p5 canvas, matter.js engine, facemesh with ml5 and
 // video capture
 function setup() {
@@ -73,6 +82,26 @@ function setup() {
     snapshot = createImage(canvas.width, canvas.height);
     // stores the cropped face from the snapshot after processing
     faceImage = createImage(canvas.width, canvas.height);
+
+
+    // connect to server 
+    // connectedToSocket = false;
+    // controllerData = false;
+
+    // let ioSocket = io();
+
+    // let clientSocket = ioSocket.connect('http://localhost:3001')
+    // clientSocket.on('connect', function (data) {
+    //     console.log("connected");
+    //     connected = true;
+
+    //     socket.on('controllerData', (data) => {
+    //         controllerData = (data === 'true');
+    //         console.log('Controller data changed to:', controllerData);
+    //     });
+
+    // });
+
 }
 
 //run video feed and draw keypoints on face silhouette
@@ -118,7 +147,6 @@ function createFacePoly() {
             poly[j] = createVector(x, y);
         }
     }
-
 }
 
 function cropFaceImage() {
@@ -178,10 +206,22 @@ function keyPressed() {
     // also saves image to the server
     if (keyCode === 13) {
         if (faceIsDetected) {
-            // take a frame from video feed on click
-            snapshot = video.get();
-            // cut out the face in the snapshot
-            cutout();
+            // trigger flash after 3 seconds 
+            setTimeout(() => {
+                isFlashing = true;
+                console.log('FLASH ON');
+                setTimeout(() => {
+                    // take a frame from video feed on click
+                    snapshot = video.get();
+                    // cut out the face in the snapshot
+                    cutout();
+                    console.log('PICTURE TAKEN');
+                    setTimeout(() => {
+                        isFlashing = false;
+                        console.log('FLASH OFF');
+                    }, flashTime);
+                }, pictureTrigger);
+            }, flashTrigger)
         };
     }
     // pressing "q" saves the faces data and sends it to 
@@ -190,6 +230,8 @@ function keyPressed() {
         saveState(faces);
     }
 }
+
+
 
 function displayFaceKeypoints() {
     push();
