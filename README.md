@@ -43,7 +43,7 @@ I now have two canvases, one with the live video feed and ml5 stuff (that is hid
 
 ### April 13 2023 
 
-In the past weeks, I was mainly working on trying to test my installation in a physical space. I documented two different attempts. I noticed that my background for my face canvas could not stay black because if the lights are closed in the room (which they need to be in order for the projections to be good), everything is in the dark, and you can't even see the chair or the camera. With a white background, I first tried to add a light on the side, but it produced weird shadows, and it felt out of place when looking at the installation as a whole.
+In the past weeks, I was mainly working on trying to test my installation in a physical space. I documented two different attempts. I noticed that my background for my face canvas could not stay black because if the lights are closed in the room (which they need to be in order for the projections to be good), everything is in the dark, and you can't even see the chair or the camera. I first tried to add a light on the side, but it produced weird shadows, and it felt out of place when looking at the installation as a whole.
 
 ![Installation test 1](public/assets/images/documentation/5.jpg)
 ![Installation test 2](public/assets/images/documentation/6.jpg)
@@ -51,7 +51,7 @@ In the past weeks, I was mainly working on trying to test my installation in a p
 I documented a short video of this version that can be seen [here](https://www.youtube.com/watch?v=qbS-pHGgWcY).
 
 
-A week later, I tried hanging a lightbulb from the ceiling just above the chair and camera, but I didn't like the look of it. Everything started to feel a bit too dark and eerie, and I wasn't feeling the vibe. I decided to switch the background to white, this creates enough light in the room and makes taking pictures better. Another problem I am having a problem accessing a projector hanging from the ceiling. The one that I have is a short-throw projector sitting on the floor, which means that there is a gap between the projection and the floor. I want the projection to be sitting on the floor to give the impression that the heads are hitting the floor.
+A week later, I tried hanging a lightbulb from the ceiling just above the chair and camera, but I didn't like the look of it. Everything started to feel a bit too dark and eerie, and I wasn't feeling the vibe. I decided to switch the background to white, this created enough light in the room and makes taking pictures better. Another problem I am having a problem accessing a projector hanging from the ceiling. The one that I have is a short-throw projector sitting on the floor, which means that there is a gap between the projection and the floor. I want the projection to be sitting on the floor to give the impression that the heads are hitting the floor.
 
 ![Installation test 3](public/assets/images/documentation/7.jpg)
 
@@ -59,3 +59,4 @@ I documented a version of the project [here](https://www.youtube.com/watch?v=Cix
 
 Both documentaiton videos have sound but it was only to test some sound avenues. I produced these two videos because I wanted to submit applications for art show calls. 
 
+ 
