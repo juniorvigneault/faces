@@ -45,10 +45,11 @@ let faceCanvas = function (fc) {
 
     let particleTest;
 
-    let backgroundColor = 20;
+    let backgroundColor = 255;
     // setup function of face canvas 
     fc.setup = function () {
         let cnv = fc.createCanvas(faceCanvasDimensions.width, faceCanvasDimensions.height);
+       console.log(windowWidth, windowHeight)
         cnv.parent('parent');
         let parentElement = document.getElementById('parent');
         engine = Engine.create();
@@ -75,7 +76,6 @@ let faceCanvas = function (fc) {
     fc.draw = function () {
         display();
         flash();
-        console.log(faces.length)
     };
 
     function display() {

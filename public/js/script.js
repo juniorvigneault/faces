@@ -35,8 +35,8 @@ let faces = [];
 let croppedFaceImage;
 
 let faceCanvasDimensions = {
-    width: 3840,
-    height: 2160
+    width: 1920,
+    height: 1080
 }
 
 let facePosition = {
@@ -52,7 +52,7 @@ let isFlashing;
 let flashTime = 50;
 let flashColor = 255;
 // let flashGradient = 50;
-let flashTrigger = 2000;
+let flashTrigger = 6000;
 let pictureTrigger = 50;
 
 // polygon for pixel collision detection
@@ -208,7 +208,7 @@ function keyPressed() {
         if (faceIsDetected) {
             // trigger flash after 3 seconds 
             setTimeout(() => {
-                isFlashing = true;
+                // isFlashing = true;
                 console.log('FLASH ON');
                 setTimeout(() => {
                     // take a frame from video feed on click
@@ -217,7 +217,7 @@ function keyPressed() {
                     cutout();
                     console.log('PICTURE TAKEN');
                     setTimeout(() => {
-                        isFlashing = false;
+                        // isFlashing = false;
                         console.log('FLASH OFF');
                     }, flashTime);
                 }, pictureTrigger);
