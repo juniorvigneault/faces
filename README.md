@@ -53,10 +53,13 @@ I documented a short video of this version that can be seen [here](https://www.y
 
 A week later, I tried hanging a lightbulb from the ceiling just above the chair and camera, but I didn't like the look of it. Everything started to feel a bit too dark and eerie, and I wasn't feeling the vibe. I decided to switch the background to white, this created enough light in the room and makes taking pictures better. Another problem I am having a problem accessing a projector hanging from the ceiling. The one that I have is a short-throw projector sitting on the floor, which means that there is a gap between the projection and the floor. I want the projection to be sitting on the floor to give the impression that the heads are hitting the floor.
 
+Also, when the background was black, I had implemented a sort of white flash on the canvas, imitating the one of a camera that would momentarily light the room and the person while the picture was being taken. I liked the idea of this, but when the background is white, obviously, you don't see it. I didn't have any ideas to fix that, but when filming my video, I had the idea of putting my hand over the projector for a split second to give the illusion that a picture was taken and create a sort of cut in time, a sort of opposite flash. It turned out well in the final video, so I'm thinking of implementing a "black flash" to punctuate the idea of taking a picture. Obviously, it won't happen at the exact time the picture is taken since the room will be pitch black for a second, making the participant invisible to the camera. But it could happen slightly before.
+
 ![Installation test 3](public/assets/images/documentation/7.jpg)
 
-I documented a version of the project [here](https://www.youtube.com/watch?v=Cix5-7LAViI).
+I documented this version of the project [here](https://www.youtube.com/watch?v=Cix5-7LAViI).
 
-Both documentaiton videos have sound but it was only to test some sound avenues. I produced these two videos because I wanted to submit applications for art show calls. 
+*Both documentaiton videos have sound but it was only to test some sound avenues. I produced these two videos because I wanted to submit applications for art show calls.*
+
 
  
