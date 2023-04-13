@@ -48,7 +48,8 @@ In the past weeks, I was mainly working on trying to test my installation in a p
 ![Installation test 1](public/assets/images/documentation/5.jpg)
 ![Installation test 2](public/assets/images/documentation/6.jpg)
 
-I documented a short video of this version that can be seen [here](https://www.youtube.com/watch?v=qbS-pHGgWcY){:target="_blank"}.
+I documented a short video of this version that can be seen <a href="https://www.youtube.com/watch?v=qbS-pHGgWcY" target="_blank">here</a>.
+
 
 
 A week later, I tried hanging a lightbulb from the ceiling just above the chair and camera, but I didn't like the look of it. Everything started to feel a bit too dark and eerie, and I wasn't feeling the vibe. I decided to switch the background to white, this created enough light in the room and makes taking pictures better. Another problem I am having a problem accessing a projector hanging from the ceiling. The one that I have is a short-throw projector sitting on the floor, which means that there is a gap between the projection and the floor. I want the projection to be sitting on the floor to give the impression that the heads are hitting the floor.
