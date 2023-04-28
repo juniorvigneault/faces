@@ -198,8 +198,8 @@ async function cutout() {
     croppedFaceImage = faceImage.get(faceTopLeft.x, faceTopLeft.y, boundingBoxWidth, boundingBoxHeight);
 
     faces.push(new Face(facePosition.x, facePosition.y, poly, croppedFaceImage));
-    // imagePath = await saveFaceImage();
-    // faces[faces.length - 1].setImageUrl(imagePath);
+    imagePath = await saveFaceImage();
+    faces[faces.length - 1].setImageUrl(imagePath);
 }
 
 function keyPressed() {
