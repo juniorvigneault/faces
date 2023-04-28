@@ -60,7 +60,7 @@ I documented this version of the project [here](https://www.youtube.com/watch?v=
 
  Yesterday I implemented the microcontroller with a pressure sensor. Now when applying pressure to the sensor triggers the camera and a picture of the face is taken. This is the first implementation of what is going to be on the chair later. 
 
- ![Microcontroller test 1](public/assets/images/documentation/8.jpg)
+ ![Microcontroller test 1](public/assets/images/documentation/1.jpg)
  In action [here](https://youtu.be/xpJZmcdJnHk).
 
 The treshold of the pressure sensor is working now with the finger, but will need to be adjusted when testing chairs with people of different weights. 
