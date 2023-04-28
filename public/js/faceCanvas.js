@@ -49,7 +49,6 @@ let faceCanvas = function (fc) {
     // setup function of face canvas 
     fc.setup = function () {
         let cnv = fc.createCanvas(faceCanvasDimensions.width, faceCanvasDimensions.height);
-       console.log(windowWidth, windowHeight)
         cnv.parent('parent');
         let parentElement = document.getElementById('parent');
         engine = Engine.create();

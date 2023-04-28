@@ -52,7 +52,7 @@ let isFlashing;
 let flashTime = 50;
 let flashColor = 255;
 // let flashGradient = 50;
-let flashTrigger = 6000;
+let flashTrigger = 1000;
 let pictureTrigger = 50;
 
 // polygon for pixel collision detection
@@ -85,23 +85,24 @@ function setup() {
 
 
     // connect to server 
-    // connectedToSocket = false;
-    // controllerData = false;
+    connectedToSocket = false;
+    controllerData = false;
 
-    // let ioSocket = io();
+    let ioSocket = io();
 
-    // let clientSocket = ioSocket.connect('http://localhost:3001')
-    // clientSocket.on('connect', function (data) {
-    //     console.log("connected");
-    //     connected = true;
+    let clientSocket = ioSocket.connect('http://localhost:3001')
+    clientSocket.on('connect', function (data) {
+        console.log("connected");
+        connected = true;
 
-    //     socket.on('controllerData', (data) => {
-    //         controllerData = (data === 'true');
-    //         console.log('Controller data changed to:', controllerData);
-    //     });
-
-    // });
-
+        clientSocket.on('controllerData', (data) => {
+            controllerData = data;
+            console.log(controllerData);
+            if (faceIsDetected && controllerData === 'true') {
+                createNewFace(flashTrigger);
+            }
+        });
+    });
 }
 
 //run video feed and draw keypoints on face silhouette
@@ -251,6 +252,25 @@ function displayFaceKeypoints() {
         pop();
     }
 }
+
+function createNewFace(flashTrigger) {
+    // trigger flash after 3 seconds 
+    setTimeout(() => {
+        // isFlashing = true;
+        console.log('FLASH ON');
+        setTimeout(() => {
+            // take a frame from video feed on click
+            snapshot = video.get();
+            // cut out the face in the snapshot
+            cutout();
+            console.log('PICTURE TAKEN');
+            setTimeout(() => {
+                // isFlashing = false;
+                console.log('FLASH OFF');
+            }, flashTime);
+        }, pictureTrigger);
+    }, flashTrigger)
+};
 
 // function to save images of face on server in assets folder
 function saveFaceImage() {

@@ -27,13 +27,6 @@ I implemented a database with mongoDB so that all the position, angle, vertices 
 
 My goal today is to do that and to create another canvas to add the faces on. I will create it on below the canvas with camera feed so we can see both. 
 
-I'm starting a list of details I want to add that I might forget along the way:
-
-1. Use higher confidence level to detect only faces 
-2. Create a seperate file for my database password
-3. Make project in two separate files listening to the same server to see if it fixes performance issues
-4. At the start of the program, have the choice to run application from scratch or get data from database and run program from last save state. Image will then be drawn from saved image on server.
-
 ### March 29 2023 
 
 I now have two canvases, one with the live video feed and ml5 stuff (that is hidden) and one were the faces are added, which will serve as a projection for the installation. It looks *nice* I think but I think I'm losing a bit of steam in terms of like is this an interesting project? I've been so focused on developping the application that now I'm looking at it and i'm like: oh cool, so... that's it? But I guess everything will be in how I present it, and sound and stuff. I also need to think about it conceptually (what it means for me). Still need to work out how I will get the data from my database and run it to position the faces with their according image at the position where they last were when I saved the state. Also.... can the faces fall and dissappear or something? or they kind of stay there forever...I guess i can't answer those things now because I'm tired and I also need to see the thing in a real space. 
@@ -63,4 +56,19 @@ I documented this version of the project [here](https://www.youtube.com/watch?v=
 *Both documentaiton videos have sound but it was only to test some sound avenues. I produced these two videos because I wanted to submit applications for art show calls.*
 
 
- 
+ ### April 28 2023 
+
+ Yesterday I implemented the microcontroller with a pressure sensor. Now when applying pressure to the sensor triggers the camera and a picture of the face is taken. This is the first implementation of what is going to be on the chair later. 
+
+ ![Microcontroller test 1](public/assets/images/documentation/8.jpg)
+ In action [here](https://youtu.be/xpJZmcdJnHk).
+
+The treshold of the pressure sensor is working now with the finger, but will need to be adjusted when testing chairs with people of different weights. 
+
+Today is the last day before september that I can get good technical help from the Computation Lab so I will try to setup a plan to fix some important issues. I will then be able to add more features during the summer. I'll also make a list and schedule about that in the following days. 
+
+The three points I want to adress today are these ones :
+
+1. Create a seperate file for my database password
+2. Make project in two separate files listening to the same server to see if it fixes performance issues
+3. At the start of the program, have the choice to run application from scratch or get data from database and run program from last save state. Image will then be drawn from saved image on server.

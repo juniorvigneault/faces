@@ -4,13 +4,17 @@ const mongoose = require('mongoose'); // Mongoose library for interacting with M
 const faceModel = require("./faceModel"); // Face model schema
 const app = express(); // Creating an instance of Express app
 const fileuploadMiddleWare = require("express-fileupload"); // Middleware for handling file uploads
-const port = process.env.PORT || 3001; // Setting the port number for the application
+const port = process.env.PORT || 3000; // Setting the port number for the application
 const fs = require('fs'); // Node.js file system module for file operations
 
-// const {
-//     SerialPort
-// } = require('serialport');
-// const socketIO = require('socket.io');
+
+const socketIO = require('socket.io');
+
+const {
+    SerialPort,
+    ReadlineParser
+} = require('serialport');
+const Readline = require('@serialport/parser-readline');
 
 // database info
 const username = "juniorvigneault";
@@ -20,26 +24,30 @@ const dbname = "Faces";
 
 let imagePath;
 
-// controller server to communicate with microcontroller
-// const controllerPort = new SerialPort({
-//     path: '/dev/tty.usbmodem14201', 
-//     baudRate: 9600
-// }); 
+//controller server to communicate with microcontroller
+const controllerPort = new SerialPort({
+    path: '/dev/tty.usbmodem14201', 
+    baudRate: 9600
+}); 
 
-// const server = app.listen(port, () => {
-//     console.log(`App is listening on port ${port}`);
-// });
+const server = app.listen(port, () => {
+    console.log(`App is listening on port ${port}`);
+});
 
 // create a socket io server and attach it to the running server
 // this allows the server to receive and emit events through
 // socket.io library
-// const io = socketIO(server);
+ const io = socketIO(server);
 
-// controllerPort.on('data', function (data) {
-//     const input = data.toString().trim();
-//     console.log('Data received:', input);
-//     io.emit('controllerData', input);
-// });
+const parser = new ReadlineParser();
+
+controllerPort.pipe(parser);
+
+// parsing data on different lines
+parser.on('data', function (incoming) {
+    console.log(incoming.trim());
+    io.emit('controllerData', incoming.trim());
+})
 
 // connect with mongo 
 app.use(fileuploadMiddleWare());
@@ -59,6 +67,8 @@ db.on("error", console.error.bind(console, "connection error: "));
 db.once("open", function () {
     console.log("Connected successfully");
 });
+
+
 
 app.post('/upload', async (req, res) => {
     let dataURL = req.body.image;
