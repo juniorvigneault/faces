@@ -65,7 +65,7 @@ I documented this version of the project [here](https://www.youtube.com/watch?v=
 
 The treshold of the pressure sensor is working now with the finger, but will need to be adjusted when testing chairs with people of different weights. 
 
-Today is the last day before september that I can get good technical help from the Computation Lab so I will try to setup a plan to fix some important issues. I will then be able to add more features during the summer. I'll also make a list and schedule about that in the following days. 
+Today is the last day before September that I can get good technical help from the Computation Lab so I will try to setup a plan to fix some important issues. I will then be able to add more features during the summer. I'll also make a list and schedule about that in the following days. 
 
 The three points I want to adress today are these ones :
 
