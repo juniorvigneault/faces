@@ -48,7 +48,7 @@ A week later, I tried hanging a lightbulb from the ceiling just above the chair 
 
 Also, when the background was black, I had implemented a sort of white flash on the canvas, imitating the one of a camera that would momentarily light the room and the person while the picture was being taken. I liked the idea of this, but when the background is white, obviously, you don't see it. I didn't have any ideas to fix that, but when filming my video, I had the idea of putting my hand over the projector for a split second to give the illusion that a picture was taken and create a sort of cut in time, a sort of opposite flash. It turned out well in the final video, so I'm thinking of implementing a "black flash" to punctuate the idea of taking a picture. Obviously, it won't happen at the exact time the picture is taken since the room will be pitch black for a second, making the participant invisible to the camera. But it could happen slightly before.
 
-![Installation test 3](public/assets/images/documentation/19.jpg)
+![Installation test 3](public/assets/images/documentation/7.jpg)
 
 I documented this version of the project [here](https://www.youtube.com/watch?v=Cix5-7LAViI).
 
@@ -60,7 +60,7 @@ I documented this version of the project [here](https://www.youtube.com/watch?v=
 
  Yesterday I implemented the microcontroller with a pressure sensor. Now when applying pressure to the sensor triggers the camera and a picture of the face is taken. This is the first implementation of what is going to be on the chair later. 
 
-![Installation test 3](public/assets/images/documentation/19.jpg)
+![Installation test 3](public/assets/images/documentation/8.jpg)
  In action [here](https://youtu.be/xpJZmcdJnHk).
 
 The treshold of the pressure sensor is working now with the finger, but will need to be adjusted when testing chairs with people of different weights. 
