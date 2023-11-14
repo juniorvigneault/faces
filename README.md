@@ -74,6 +74,7 @@ The three points I want to adress today are these ones :
 3. At the start of the program, have the choice to run application from scratch or get data from database and run program from last save state. Image will then be drawn from saved image on server.
 
 Splitting everything in two separate projects is a bit confusing and I want to take a break for today. 
-- Created a folder called performance that will hold the matter.js canvas. For now it is a canvas with a test particle. 
-- Next step is create a second folder called creation that will hold the canvas with video and ml5. Both folders have a client and server side that point to the same server. 
+- I Created a folder called "performance" that will hold the matter.js canvas. For now it is a canvas with a test particle. 
+- Next step is to create a second folder called "creation" that will hold the canvas with video and ml5. Both folders have a client and server side that point to the same server. 
 - My goal for next week is to be able to send a sort of signal from the creation project to the performance canvas. So for example I could click on a button on the creation page and it could add a test particle to the performance canvas. 
+- Both performance and creation need to be in the public folder pointing to the server using socket
