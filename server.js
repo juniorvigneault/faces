@@ -10,25 +10,25 @@ const fs = require('fs'); // Node.js file system module for file operations
 
 const socketIO = require('socket.io');
 
-const {
-    SerialPort,
-    ReadlineParser
-} = require('serialport');
-const Readline = require('@serialport/parser-readline');
+// const {
+//     SerialPort,
+//     ReadlineParser
+// } = require('serialport');
+// const Readline = require('@serialport/parser-readline');
 
 // database info
 const username = "juniorvigneault";
 const password = "gFn78p58UL7oE6Yo";
 const cluster = "faces.5ak7ogt";
-const dbname = "Faces";
+const dbname = "faces_data";
 
 let imagePath;
 
 //controller server to communicate with microcontroller
-const controllerPort = new SerialPort({
-    path: '/dev/tty.usbmodem14201',
-    baudRate: 9600
-});
+// const controllerPort = new SerialPort({
+//     path: '/dev/tty.usbmodem14201',
+//     baudRate: 9600
+// });
 
 const server = app.listen(port, () => {
     console.log(`App is listening on port ${port}`);
@@ -39,15 +39,15 @@ const server = app.listen(port, () => {
 // socket.io library
 const io = socketIO(server);
 
-const parser = new ReadlineParser();
+// const parser = new ReadlineParser();
 
-controllerPort.pipe(parser);
+// controllerPort.pipe(parser);
 
 // parsing data on different lines
-parser.on('data', function (incoming) {
-    console.log(incoming.trim());
-    io.emit('controllerData', incoming.trim());
-})
+// parser.on('data', function (incoming) {
+//     console.log(incoming.trim());
+//     io.emit('controllerData', incoming.trim());
+// })
 
 // connect with mongo 
 app.use(fileuploadMiddleWare());
@@ -60,8 +60,9 @@ app.use(express.static('public'));
 app.use(express.static(__dirname + '/node_modules'));
 
 mongoose.connect(`mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${dbname}?retryWrites=true&w=majority`);
-
-// checking to see if connection with database is successful 
+// mongoose.connect(`mongodb+srv://juniorvigneault:gFn78p58UL7oE6Yo@faces.5ak7ogt.mongodb.net/?retryWrites=true&w=majority`)
+//checking to see
+//if connection with database is successful
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error: "));
 db.once("open", function () {

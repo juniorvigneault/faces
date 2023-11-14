@@ -35,7 +35,7 @@ let faces = [];
 let croppedFaceImage;
 
 let faceCanvasDimensions = {
-    width: 1920,
+    width: 1000,
     height: 1080
 }
 
@@ -232,8 +232,6 @@ function keyPressed() {
     }
 }
 
-
-
 function displayFaceKeypoints() {
     push();
     noFill();
@@ -283,7 +281,6 @@ function saveFaceImage() {
 
         // append image to form
         formData.append('image', imageFile);
-
         // Send the FormData object to the server using a POST request
         // Get the image path from the server response
         fetch('/upload', {
