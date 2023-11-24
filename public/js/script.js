@@ -35,8 +35,8 @@ let faces = [];
 let croppedFaceImage;
 
 let faceCanvasDimensions = {
-    width: 1000,
-    height: 1080
+    width: 500,
+    height: 500
 }
 
 let facePosition = {

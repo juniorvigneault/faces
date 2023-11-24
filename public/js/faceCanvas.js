@@ -14,28 +14,33 @@ let faceCanvas = function (fc) {
         mouseConstraint,
         mouse
 
+    let onVerticalScreen = false;
+
     // boundaries static matter js bodies bottom, left and right
-    let ground, leftWall, rightWall;
+    let ground, leftWall, rightWall, extraTestWall;
     let boundaries = [];
 
+    extraTestWall = 10;
     let boundaryGround = {
         x: 200,
-        y: faceCanvasDimensions.height,
+        y: faceCanvasDimensions.height - extraTestWall,
         // make sure the length of ground covers width of canvas
         w: faceCanvasDimensions.width * 2,
         h: 50,
         angle: 0
     };
+    // 
     let boundaryLeftWall = {
-        x: 0,
+        x: extraTestWall,
         y: 200,
         w: 50,
         // make sure the height of wall covers height of canvas
         h: faceCanvasDimensions.height * 2,
         angle: 0
     };
+
     let boundaryRightWall = {
-        x: faceCanvasDimensions.width,
+        x: faceCanvasDimensions.width - extraTestWall,
         y: 200,
         w: 50,
         // make sure the height of wall covers height of canvas
@@ -45,12 +50,14 @@ let faceCanvas = function (fc) {
 
     let particleTest;
 
-    let backgroundColor = 255;
+    let backgroundColor = 0;
     // setup function of face canvas 
     fc.setup = function () {
         let cnv = fc.createCanvas(faceCanvasDimensions.width, faceCanvasDimensions.height);
         cnv.parent('parent');
         let parentElement = document.getElementById('parent');
+        // rotate canvas for vertical tv
+        // parentElement.style.transform = 'rotate(270deg)'
         engine = Engine.create();
         world = engine.world;
         runner = Runner.create();
@@ -73,8 +80,20 @@ let faceCanvas = function (fc) {
 
     // draw function of face canvas
     fc.draw = function () {
+
+        if (onVerticalScreen) {
+            fc.push();
+            fc.translate(fc.width / 2, fc.height / 2);
+
+            fc.rotate(fc.radians(90));
+            fc.translate(-fc.width / 2, -fc.height / 2);
+        }
+        fc.background(0);
         display();
         flash();
+        if (onVerticalScreen) {
+            fc.pop();
+        }
     };
 
     function display() {
