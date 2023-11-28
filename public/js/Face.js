@@ -4,21 +4,22 @@ class Face {
         this.x = x;
         this.y = y;
         this.image = croppedFace
+        this.isChopped = false;
         // polygon vertices created in the cutout function 
         // based on the keypoints
         this.poly = poly;
         this.options = {
             isStatic: false,
-            friction:1,
+            friction: 1,
             restitution: 0.5
 
         };
-        this.isCreated =false;
+        this.isCreated = false;
         // this.world = world
     }
 
-    
-    setup(world){
+
+    setup(world) {
         // create a body from the poly vertices
         this.body = Matter.Bodies.fromVertices(this.x, this.y, this.poly, this.options);
         // add the body to the world
@@ -38,24 +39,29 @@ class Face {
     }
 
     display(fc) {
-        if (this.isCreated){
-        // get live position of body and angle
-        this.pos = this.body.position;
-        this.angle = this.body.angle;
-        // translate the 0,0 to the x and y of body
-        // rotate the image based on the angle of body
-        fc.push();
-        fc.translate(this.pos.x, this.pos.y);
-        fc.rotate(this.angle);
-        // center and create image to match body 0,0
-        fc.imageMode(CENTER);
-        fc.image(this.image, 0, this.offset.y)
-        fc.pop();
+        if (this.isCreated) {
+            // get live position of body and angle
+            this.pos = this.body.position;
+            this.angle = this.body.angle;
+            // translate the 0,0 to the x and y of body
+            // rotate the image based on the angle of body
+            fc.push();
+            fc.translate(this.pos.x, this.pos.y);
+            fc.rotate(this.angle);
+            // center and create image to match body 0,0
+            fc.imageMode(CENTER);
+            fc.image(this.image, 0, this.offset.y)
+            fc.pop();
         }
     }
 
     setImageUrl(imagePath) {
         this.imagePath = imagePath;
+    }
+
+    // remove face from the engine
+    removeFromWorld(world) {
+        Matter.World.remove(world, this.body);
     }
 }
 

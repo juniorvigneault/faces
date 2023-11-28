@@ -3,6 +3,7 @@ let faceVertices = [];
 
 // ml5 facemesh and detections 
 let facemesh;
+let modelIsReady = false;
 let detections = [];
 let faceIsDetected = false;
 let faceTopLeft = {
@@ -35,8 +36,8 @@ let faces = [];
 let croppedFaceImage;
 
 let faceCanvasDimensions = {
-    width: 500,
-    height: 500
+    width: 1000,
+    height: 1000
 }
 
 let facePosition = {
@@ -78,6 +79,7 @@ function setup() {
     // run modelReady when initialized
     facemesh = ml5.facemesh(video, options, modelReady);
 
+    // console.log(facemesh)
     // create new image to later store the snapshot in
     snapshot = createImage(canvas.width, canvas.height);
     // stores the cropped face from the snapshot after processing
@@ -150,20 +152,67 @@ function createFacePoly() {
     }
 }
 
+// function cropFaceImage() {
+//     for (let i = 0; i < detections.length; i++) {
+//         // find the top and bottom coordinates of the face to find center
+//         // top left bounding box
+//         faceTopLeft.x = detections[i].boundingBox.topLeft[0][0];
+//         faceTopLeft.y = detections[i].boundingBox.topLeft[0][1];
+//         // bottom right bounding box
+//         faceBottomRight.x = detections[i].boundingBox.bottomRight[0][0];
+//         faceBottomRight.y = detections[i].boundingBox.bottomRight[0][1];
+//     }
+//     boundingBoxWidth = (faceBottomRight.x - faceTopLeft.x);
+//     boundingBoxHeight = (faceBottomRight.y - faceTopLeft.y);
+//     croppedFaceImage = faceImage.get(faceTopLeft.x, faceTopLeft.y, boundingBoxWidth, boundingBoxHeight);
+// }
+
 function cropFaceImage() {
+    // Assuming there's only one face detected, adjust the loop if necessary
     for (let i = 0; i < detections.length; i++) {
-        // find the top and bottom coordinates of the face to find center
-        // top left bounding box
+        // Get the keypoints of the silhouette of each face
+        const faceKeypoints = detections[i].annotations.silhouette;
+
+        // Find the top and bottom coordinates of the face to find center
+        // Top left bounding box
         faceTopLeft.x = detections[i].boundingBox.topLeft[0][0];
         faceTopLeft.y = detections[i].boundingBox.topLeft[0][1];
-        // bottom right bounding box
+        // Bottom right bounding box
         faceBottomRight.x = detections[i].boundingBox.bottomRight[0][0];
         faceBottomRight.y = detections[i].boundingBox.bottomRight[0][1];
+
+        // Find the distance between the edge of the bounding box and the first point of the silhouette
+        const distance = dist(faceTopLeft.x, faceTopLeft.y, faceKeypoints[0][0], faceKeypoints[0][1]);
+
+        // Use different factors for top, left, right, and bottom margins
+        let topMarginFactor = 0.35;
+        let leftMarginFactor = 0.25;
+        let rightMarginFactor = 0.25;
+        let bottomMarginFactor = 0.35;
+
+        // Calculate margins for each side based on the factors and distance
+        let topMargin = distance * topMarginFactor;
+        let leftMargin = distance * leftMarginFactor;
+        let rightMargin = distance * rightMarginFactor;
+        let bottomMargin = distance * bottomMarginFactor;
+
+        // Apply margins to the top left and bottom right coordinates
+        faceTopLeft.x += leftMargin;
+        faceTopLeft.y += topMargin;
+        faceBottomRight.x -= rightMargin;
+        faceBottomRight.y -= bottomMargin;
+
+        // Calculate the adjusted bounding box width and height
+        let adjustedBoundingBoxWidth = faceBottomRight.x - faceTopLeft.x;
+        let adjustedBoundingBoxHeight = faceBottomRight.y - faceTopLeft.y;
+
+        // Crop the face image with the adjusted bounding box
+        croppedFaceImage = faceImage.get(faceTopLeft.x, faceTopLeft.y, adjustedBoundingBoxWidth, adjustedBoundingBoxHeight);
     }
-    boundingBoxWidth = (faceBottomRight.x - faceTopLeft.x);
-    boundingBoxHeight = (faceBottomRight.y - faceTopLeft.y);
-    croppedFaceImage = faceImage.get(faceTopLeft.x, faceTopLeft.y, boundingBoxWidth, boundingBoxHeight);
 }
+
+
+
 
 // cut out the face in the snapshot 
 async function cutout() {
