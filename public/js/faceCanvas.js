@@ -17,6 +17,7 @@ let faceCanvas = function (fc) {
         mouse
     let tank;
     let onVerticalScreen = false;
+    let hitline = false
 
     // boundaries static matter js bodies bottom, left and right
     let ground, leftWall, rightWall, extraTestWall;
@@ -145,9 +146,17 @@ let faceCanvas = function (fc) {
 
             let d = fc.dist(faces[i].body.position.x, faces[i].body.position.y, tank.midpoint.x, tank.midpoint.y);
             if (faces[i].isChopped == false && d <= 100) {
-                breakFace();
-                faces[i].isChopped = true;
-                faces[i].removeFromWorld(world);
+
+                setTimeout(() => {
+                    faces[i].hitline = true;
+                }, 2000)
+                if (faces[i].hitline === true) {
+                    console.log('hit!')
+                    breakFace();
+                    faces[i].removeFromWorld(world);
+                    faces[i].isChopped = true;
+                    hitline = false;
+                }
             }
         }
     };

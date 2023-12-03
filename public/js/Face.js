@@ -5,6 +5,7 @@ class Face {
         this.y = y;
         this.image = croppedFace
         this.isChopped = false;
+        this.hitline = false;
         // polygon vertices created in the cutout function 
         // based on the keypoints
         this.poly = poly;

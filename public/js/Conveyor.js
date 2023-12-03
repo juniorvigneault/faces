@@ -20,16 +20,18 @@ class Conveyor {
     }
 
     display(fc) {
+        this.displayConveyorPins(fc);
+        
         let pos = this.body.position;
         fc.push();
         fc.rectMode(CENTER);
-        fc.fill(255, 0, 0);
+        fc.fill(255, 255, 255);
         fc.translate(pos.x, pos.y);
         fc.rotate(this.body.angle);
         fc.rect(0, 0, this.w, this.h);
         fc.pop();
 
-        this.displayConveyorPins(fc);
+
 
         // move pin on path
         // this.force = this.conveyorPins[0].conveyorPinFollow(this.path);
