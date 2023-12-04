@@ -1,7 +1,7 @@
 class Tank {
     constructor(world) {
 
-        this.x = 750;
+        this.x = 1200;
         this.y = 500;
         this.w = 30;
         this.h = 250;

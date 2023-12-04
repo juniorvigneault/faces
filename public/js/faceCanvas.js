@@ -16,7 +16,7 @@ let faceCanvas = function (fc) {
         mouseConstraint,
         mouse
     let tank;
-    let onVerticalScreen = false;
+    let onVerticalScreen = true;
     let hitline = false
 
     // boundaries static matter js bodies bottom, left and right
@@ -26,9 +26,9 @@ let faceCanvas = function (fc) {
     // Conveyors
     let conveyors = []
     let conveyor1 = {
-        x: 350,
+        x: 1000,
         y: 300,
-        w: 700,
+        w: 1000,
         h: 50,
         angle: 0
     }
@@ -96,7 +96,8 @@ let faceCanvas = function (fc) {
 
     let particleTest;
 
-    let backgroundColor = 255;
+    let backgroundColor = (207,
+        185, 151);
     // setup function of face canvas 
     fc.setup = function () {
         let cnv = fc.createCanvas(faceCanvasDimensions.width, faceCanvasDimensions.height);
@@ -129,18 +130,12 @@ let faceCanvas = function (fc) {
             fc.push();
             fc.translate(fc.width / 2, fc.height / 2);
 
-            fc.rotate(fc.radians(90));
+            fc.rotate(fc.radians(-90));
             fc.translate(-fc.width / 2, -fc.height / 2);
         }
         fc.background(0);
         display();
         flash();
-        if (onVerticalScreen) {
-            fc.pop();
-        }
-
-        tank.update(fc)
-
 
         for (let i = 0; i < faces.length; i++) {
 
@@ -159,6 +154,15 @@ let faceCanvas = function (fc) {
                 }
             }
         }
+
+        tank.update(fc)
+
+        if (onVerticalScreen) {
+            fc.pop();
+        }
+
+
+
     };
 
     breakFace = () => {
@@ -225,7 +229,7 @@ let faceCanvas = function (fc) {
 
 
     function display() {
-        fc.background(backgroundColor);
+        fc.background(207, 185, 151);
         // display ground at the bottom of canvas
 
         // Move conveyor pins
