@@ -19,8 +19,8 @@ class Boundary {
         let pos = this.body.position;
         fc.push();
         fc.rectMode(CENTER);
-        fc.fill(255, 255, 255);
-        // fc.noStroke();
+        fc.fill(75);
+        fc.noStroke();
         fc.translate(pos.x, pos.y);
         fc.rotate(this.body.angle);
         fc.rect(0, 0, this.w, this.h);

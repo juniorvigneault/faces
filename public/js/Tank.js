@@ -1,8 +1,8 @@
 class Tank {
     constructor(world) {
 
-        this.x = 1200;
-        this.y = 500;
+        this.x = 1250;
+        this.y = 100;
         this.w = 30;
         this.h = 250;
         this.a = 0;
@@ -26,7 +26,7 @@ class Tank {
         this.tankWalls.push(new Boundary(this.x, this.y, this.w, this.h, this.a, world));
         this.tankWalls.push(new Boundary(this.x + 50, this.y + this.h / 2 + 20, 130, 30, this.a, world));
         this.particles.push(new Particle(this.x + 35, this.y + 100, 40, world));
-        this.tankWalls.push(new Boundary(this.x + 110, this.y + 210, 30, 140, this.a, world));
+        this.tankWalls.push(new Boundary(this.x + 140, this.y + 210, 30, 140, this.a, world));
         this.particles.push(new Particle(this.x + 90, this.y + 120, 30, world));
     }
 
@@ -39,12 +39,24 @@ class Tank {
             this.particles[i].display(fc)
         }
         this.drawLine(fc);
+        this.drawTank(fc);
     }
 
     drawLine(fc) {
         fc.push();
         fc.stroke(0);
         fc.line(this.breakLine.x, this.breakLine.y, this.breakLine.x2, this.breakLine.y2);
+        fc.pop();
+    }
+
+    drawTank(fc) {
+        fc.push();
+        fc.rectMode(CENTER);
+        fc.fill(115)
+        fc.noStroke();
+        fc.rect(this.x + 125, this.y + 25, 280, 300)
+        fc.rect(this.x + 195, this.y + 220, 200, 120)
+        fc.image(starIMG, this.x + 110, this.y - 40)
         fc.pop();
     }
 }

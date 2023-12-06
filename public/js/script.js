@@ -36,13 +36,13 @@ let faces = [];
 let croppedFaceImage;
 
 let faceCanvasDimensions = {
-    width: 2600,
-    height: 1450
+    width: 1920,
+    height: 1080
 }
 
 let facePosition = {
-    x: faceCanvasDimensions.width / 2,
-    y: -100
+    x: faceCanvasDimensions.width / 2 - 300,
+    y: -500
 }
 
 // save face image to server
@@ -62,7 +62,12 @@ let poly = [];
 let videCanvas;
 
 let controllerData = false;
-// let connectedToSocket = false;
+let connectedToSocket = false;
+let starIMG;
+
+function preload() {
+    starIMG = loadImage('assets/images/star_voltus.png');
+}
 // setting up p5 canvas, matter.js engine, facemesh with ml5 and
 // video capture
 function setup() {
@@ -86,25 +91,25 @@ function setup() {
     faceImage = createImage(canvas.width, canvas.height);
 
 
-    // // connect to server 
-    // connectedToSocket = false;
-    // controllerData = false;
+    // connect to server 
+    connectedToSocket = false;
+    controllerData = false;
 
-    // let ioSocket = io();
+    let ioSocket = io();
 
-    // let clientSocket = ioSocket.connect('http://localhost:3001')
-    // clientSocket.on('connect', function (data) {
-    //     console.log("connected");
-    //     connected = true;
+    let clientSocket = ioSocket.connect('http://localhost:3001')
+    clientSocket.on('connect', function (data) {
+        console.log("connected");
+        connected = true;
 
-    //     clientSocket.on('controllerData', (data) => {
-    //         controllerData = data;
-    //         console.log(controllerData);
-    //         if (faceIsDetected && controllerData === 'true') {
-    //             createNewFace(flashTrigger);
-    //         }
-    //     });
-    // });
+        clientSocket.on('controllerData', (data) => {
+            controllerData = data;
+            console.log(controllerData);
+            if (faceIsDetected && controllerData === 'GREEN') {
+                triggerButton();
+            }
+        });
+    });
 }
 
 //run video feed and draw keypoints on face silhouette
@@ -249,6 +254,27 @@ async function cutout() {
     faces.push(new Face(facePosition.x, facePosition.y, poly, croppedFaceImage));
     imagePath = await saveFaceImage();
     faces[faces.length - 1].setImageUrl(imagePath);
+}
+
+function triggerButton() {
+    if (faceIsDetected) {
+        // trigger flash after 3 seconds 
+        setTimeout(() => {
+            // isFlashing = true;
+            console.log('FLASH ON');
+            setTimeout(() => {
+                // take a frame from video feed on click
+                snapshot = video.get();
+                // cut out the face in the snapshot
+                cutout();
+                console.log('PICTURE TAKEN');
+                setTimeout(() => {
+                    // isFlashing = false;
+                    console.log('FLASH OFF');
+                }, flashTime);
+            }, pictureTrigger);
+        }, flashTrigger)
+    };
 }
 
 function keyPressed() {

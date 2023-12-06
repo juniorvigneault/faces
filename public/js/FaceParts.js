@@ -8,8 +8,8 @@ class FaceParts {
 
         this.options = {
             isStatic: false,
-            friction: 0,
-            restitution: 0.5
+            friction: 1,
+            restitution: .5
         };
         this.world = world;
         this.body = Matter.Bodies.rectangle(this.x, this.y, this.w, this.h, this.options);
@@ -30,5 +30,9 @@ class FaceParts {
         fc.imageMode(CENTER);
         fc.image(this.image, 0, 0)
         fc.pop();
+    }
+
+    removeFromWorld(world) {
+        Matter.World.remove(world, this.body);
     }
 }

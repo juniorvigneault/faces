@@ -26,9 +26,9 @@ let faceCanvas = function (fc) {
     // Conveyors
     let conveyors = []
     let conveyor1 = {
-        x: 1000,
-        y: 300,
-        w: 1000,
+        x: 750,
+        y: -150,
+        w: 800,
         h: 50,
         angle: 0
     }
@@ -67,26 +67,27 @@ let faceCanvas = function (fc) {
 
     extraTestWall = 10;
 
+    // GROUND WHEN VERTICAL
     let boundaryGround = {
-        x: 200,
-        y: faceCanvasDimensions.height - extraTestWall,
+        x: 1100,
+        y: 1450,
         // make sure the length of ground covers width of canvas
-        w: faceCanvasDimensions.width * 2,
+        w: 900,
         h: 50,
         angle: 0
     };
-    // 
+    // LEFT WALL WHEN VERTICAL
     let boundaryLeftWall = {
-        x: extraTestWall,
+        x: 400,
         y: 200,
         w: 50,
         // make sure the height of wall covers height of canvas
         h: faceCanvasDimensions.height * 2,
         angle: 0
     };
-
+    // RIGHT WALL WHEN VERTICAL
     let boundaryRightWall = {
-        x: faceCanvasDimensions.width - extraTestWall,
+        x: 1500,
         y: 200,
         w: 50,
         // make sure the height of wall covers height of canvas
@@ -96,8 +97,7 @@ let faceCanvas = function (fc) {
 
     let particleTest;
 
-    let backgroundColor = (207,
-        185, 151);
+    let backgroundColor;
     // setup function of face canvas 
     fc.setup = function () {
         let cnv = fc.createCanvas(faceCanvasDimensions.width, faceCanvasDimensions.height);
@@ -229,7 +229,9 @@ let faceCanvas = function (fc) {
 
 
     function display() {
-        fc.background(207, 185, 151);
+        // fc.background(200, 210, 203);
+        fc.background(245);
+
         // display ground at the bottom of canvas
 
         // Move conveyor pins
@@ -328,6 +330,7 @@ let faceCanvas = function (fc) {
 
     function createConveyor(fc) {
         conveyor1 = new Conveyor(conveyor1.x, conveyor1.y, conveyor1.w, conveyor1.h, conveyor1.angle, world, fc, numberOfPins);
+
         conveyors.push(conveyor1);
     }
 
