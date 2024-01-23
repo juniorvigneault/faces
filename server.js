@@ -25,7 +25,7 @@ let imagePath;
 
 // controller server to communicate with microcontroller
 const controllerPort = new SerialPort({
-    path: '/dev/tty.usbmodem143101',
+    path: '/dev/tty.usbmodem1441101',
     baudRate: 115200
 });
 

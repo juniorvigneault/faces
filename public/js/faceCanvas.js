@@ -26,7 +26,7 @@ let faceCanvas = function (fc) {
     // Conveyors
     let conveyors = []
     let conveyor1 = {
-        x: 750,
+        x: 800,
         y: -150,
         w: 800,
         h: 50,
@@ -130,7 +130,7 @@ let faceCanvas = function (fc) {
             fc.push();
             fc.translate(fc.width / 2, fc.height / 2);
 
-            fc.rotate(fc.radians(-90));
+            fc.rotate(fc.radians(90));
             fc.translate(-fc.width / 2, -fc.height / 2);
         }
         fc.background(0);
